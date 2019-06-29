@@ -1,0 +1,5 @@
+library directory
+	hello.py 
+		is a test module which containts function 'hello'
+	IO.py
+		is module for reading in WeakLib, FLASH data. Data format: hdf5
