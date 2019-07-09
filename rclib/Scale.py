@@ -2,7 +2,7 @@ def scale_FLASH_2DCylindrical( var ):
   import numpy as np
  
   var_1D = np.zeros(len(var[:,0,0,0]))
-  print('var    shape ', var.shape)
+  #print('var    shape ', var.shape)
 
   for ii in range(0,len(var_1D)):
     kk = 0;

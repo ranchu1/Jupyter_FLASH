@@ -22,7 +22,9 @@ def test_FLASH_IO( dir, filename, ID ):
   veltot = np.sqrt( veltot )
   veltot = velx
   dens = f['dens']
+  dena = f['dena']
+  prsa = f['prsa']
   pres = f['pres']
   
   return( block_size, coordinates, bounding_box, \
-  veltot, dens, pres )
+  veltot, dens, dena, pres, prsa )
