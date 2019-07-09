@@ -13,6 +13,7 @@ def test_FLASH_IO( dir, filename, ID ):
   
   real_scalars = f['real scalars']
   time = real_scalars[0][1]
+  print( 'time =', time ,' s')
   block_size = f['block size']
   coordinates = f['coordinates']
   bounding_box = f['bounding box']
