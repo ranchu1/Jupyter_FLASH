@@ -29,3 +29,28 @@ def scale_FLASH_2DCylindrical_Coordinate( var ):
   return( r )
 
 # ---------------------------------------
+def scale_sort( indep_var, dep_var ):
+    import numpy as np
+    
+    var_doubles = np.vstack((indep_var, dep_var)).T
+    print(var_doubles)
+    
+    # sort list with key
+    sortedList = sorted(var_doubles, key=takeFirst)
+    
+    # print list
+    print('Sorted list take First:', sortedList)
+    
+    # return the sorted list
+    return( sortedList )
+    
+# --------------------------------------
+# take second element for sort
+def takeSecond(elem):
+    return elem[1]
+
+
+# --------------------------------------
+# take first element for sort
+def takeFirst(elem):
+    return elem[0]
