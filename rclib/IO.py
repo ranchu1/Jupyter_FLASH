@@ -43,8 +43,8 @@ def test_FLASH_IO_2D( dir, filename, ID ):
   string_scalars = f['string scalars']
   geometry = string_scalars[0][1] 
     
-  if geometry != 'cylindrical' :
-    print('geometry:', geometry)
+  if geometry[0:11] != b'cylindrical' :
+    print('geometry:', geometry[0:11])
     print('!----------------------------!')
     print('Warning: NOT Cylindrical Data!')
     print('!----------------------------!')
