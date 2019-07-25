@@ -130,3 +130,63 @@ def plot_FLASHVariable_2DCylindrical\
   return
  
 # ---------------------------------------
+def plot_FLASH_Yahil_vs_Analytical\
+      ( Gravitational_constant, second, kilometer, light_speed, \
+       collapse_time, kappa, gamma, radius, X1D, D1D, V1D, M1D, \
+       time, radius_1dx, dens_1dx, velx_1dx ):
+  
+  import numpy as np
+  import matplotlib.pyplot as plt
+
+  fig, axs = plt.subplots(1,2, figsize=(16, 8), dpi= 160, facecolor='w', edgecolor='k')
+  fig.subplots_adjust(hspace = 2.5, wspace= 0.4) # (hspace = .5, wspace=.001)
+
+  axs = axs.ravel()
+
+  test_time = [collapse_time - time* second]
+  #test_time = [51. * millisecond, 15. * millisecond, 5. * millisecond, \
+  #             1.5 * millisecond, 0.5* millisecond]
+    
+  for mt in test_time:
+    dimensionless_X = pow(kappa,-1/2) * pow(Gravitational_constant,(gamma-1)/2) \
+    * radius * pow(mt,gamma-2)
+    D_interp = np.interp(dimensionless_X, X1D, D1D)
+    V_interp = np.interp(dimensionless_X, X1D, V1D)
+    M_interp = np.interp(dimensionless_X, X1D, M1D)
+
+    D = pow(Gravitational_constant,-1) * pow(mt,-2) * D_interp
+    V = pow(kappa,1/2) * pow(Gravitational_constant,(1-gamma)/2) \
+    * pow(mt,1-gamma) * V_interp
+    
+    ax1 = plt.subplot(121)
+    plt.loglog(radius/kilometer, D,label='a-%.1f'%(mt*1e3)+' ms')
+    plt.loglog(radius_1dx/kilometer, dens_1dx,'--.',\
+               label='c-%.1f'%(150-time*1e3)+' ms')
+    
+    ax2 = plt.subplot(122)
+    plt.semilogx(radius/kilometer,V/light_speed)
+    plt.semilogx(radius_1dx/kilometer, velx_1dx/light_speed,'--.')
+
+    
+  ax1 = plt.subplot(121)
+  plt.legend(loc='best')
+  plt.xlim((1e-1, 1e5))
+  plt.ylim((1e1, 1e15))
+  plt.xlabel('Radius [km]',fontsize=16)
+  plt.ylabel('Mass Density [g/cm3]',fontsize=16)
+  ax1.tick_params(direction='out', length=6, width=2, colors='k',
+                grid_color='k', grid_alpha=0.5,labelsize = 12)
+    
+  ax2 = plt.subplot(122)
+  plt.xlim((1e-1, 1e5))
+  plt.ylim((-0.15, 0.1))
+  plt.xlabel('Radius [km]',fontsize=16)
+  plt.ylabel('Velocity [c]',fontsize=16)
+  ax2.tick_params(direction='out', length=6, width=2, colors='k',
+                grid_color='k', grid_alpha=0.5,labelsize = 12)
+
+
+  plt.subplots_adjust(bottom=0.25, top=0.75)
+  #plt.show()
+    
+  return(fig)
