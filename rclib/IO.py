@@ -103,8 +103,6 @@ def FLASH_IO_1D( dir, filename, ID, filefollowindex, Verbose ):
   velz = f['velz']
 
   dens = f['dens']
-  dena = f['dena']
-  prsa = f['prsa']
   pres = f['pres']
     
   ## converting coordinates and variables to 1D array
