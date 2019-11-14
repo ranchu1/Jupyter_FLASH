@@ -133,20 +133,18 @@ def plot_FLASHVariable_2DCylindrical\
 def plot_FLASH_Yahil_vs_Analytical\
       ( Gravitational_constant, second, kilometer, light_speed, \
        collapse_time, kappa, gamma, radius, X1D, D1D, V1D, M1D, \
-       time, radius_1dx, dens_1dx, velx_1dx ):
+       time, time_a, radius_1dx, dens_1dx, velx_1dx ):
   
   import numpy as np
   import matplotlib.pyplot as plt
 
-  fig, axs = plt.subplots(1,2, figsize=(16, 8), dpi= 160, facecolor='w', edgecolor='k')
+  fig, axs = plt.subplots(1,2, figsize=(12, 6), dpi= 160, facecolor='w', edgecolor='k')
   fig.subplots_adjust(hspace = 2.5, wspace= 0.4) # (hspace = .5, wspace=.001)
 
   axs = axs.ravel()
 
-  test_time = [collapse_time - time* second]
-  #test_time = [51. * millisecond, 15. * millisecond, 5. * millisecond, \
-  #             1.5 * millisecond, 0.5* millisecond]
-    
+  test_time = [collapse_time - time_a* second]
+
   for mt in test_time:
     dimensionless_X = pow(kappa,-1/2) * pow(Gravitational_constant,(gamma-1)/2) \
     * radius * pow(mt,gamma-2)
@@ -187,6 +185,5 @@ def plot_FLASH_Yahil_vs_Analytical\
 
 
   plt.subplots_adjust(bottom=0.25, top=0.75)
-  #plt.show()
     
   return(fig)
